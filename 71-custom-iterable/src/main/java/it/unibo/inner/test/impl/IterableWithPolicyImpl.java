@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
     private T[] elements;
+    private Predicate<T> filter;
 
     public IterableWithPolicyImpl(final T[] e) {
         this.elements = e;
