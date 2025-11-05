@@ -41,7 +41,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
 
         public T next() {
             try {
-                return IterableWithPolicyImpl.this.elements[currentIndex + 1];
+                return IterableWithPolicyImpl.this.elements[currentIndex];
             } finally {
                 this.currentIndex++;
             }
