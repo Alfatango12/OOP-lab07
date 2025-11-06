@@ -38,7 +38,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         public CustomIterator() {
             this.currentIndex = 0;
         }
-
+        
         @Override
         public boolean hasNext() {
             while (this.currentIndex >= 0 && this.currentIndex < IterableWithPolicyImpl.this.elements.length && !policy.test(IterableWithPolicyImpl.this.elements[this.currentIndex]) ) { //out of bounds
