@@ -6,15 +6,25 @@ import java.util.Iterator;
 
 public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
     private T[] elements;
-    private Predicate<T> filter;
+    private Predicate<T> policy;
 
     public IterableWithPolicyImpl(final T[] e) {
+        this(e, new Predicate<T>() {
+            @Override
+            public boolean test(T elem) {
+                return true;
+            }
+        });
+    }
+
+    public IterableWithPolicyImpl(final T[] e, final Predicate<T> p) {
         this.elements = e;
+        setIterationPolicy(p);
     }
 
     @Override
     public void setIterationPolicy(Predicate<T> filter) {
-        
+        this.policy = filter;
     }
 
     @Override
@@ -31,6 +41,10 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
 
         @Override
         public boolean hasNext() {
+            while (this.currentIndex >= 0 && this.currentIndex < IterableWithPolicyImpl.this.elements.length && !policy.test(IterableWithPolicyImpl.this.elements[this.currentIndex]) ) { //out of bounds
+                this.currentIndex++;
+            }
+            
             if (this.currentIndex >= 0 && this.currentIndex < IterableWithPolicyImpl.this.elements.length) {
                 return true;
             }
@@ -38,14 +52,12 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
             else {
                 return false;
             }
+
+
         }
 
         public T next() {
-            try {
-                return IterableWithPolicyImpl.this.elements[currentIndex];
-            } finally {
-                this.currentIndex++;
-            }
+            return IterableWithPolicyImpl.this.elements[this.currentIndex++];
         }
     }
 }
