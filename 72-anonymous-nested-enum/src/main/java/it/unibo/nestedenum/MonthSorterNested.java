@@ -8,8 +8,12 @@ import java.util.Objects;
  * Implementation of {@link MonthSorter}.
  */
 public final class MonthSorterNested implements MonthSorter {
-    private enum Months {
-        january,
+    private static final int SHORT_MONTH = 28;
+    private static final int USUAL_MONTH = 30;
+    private static final int LONG_MONTH = 31;
+   
+    public enum Months {
+        january(),
         february,
         march,
         april,
@@ -19,8 +23,12 @@ public final class MonthSorterNested implements MonthSorter {
         august,
         september,
         october,
-        november,
+        november(USUAL_MONTH),
         december
+
+        public Months() {
+            
+        }
     }
 
     private void checkMonthName(final String name) {
