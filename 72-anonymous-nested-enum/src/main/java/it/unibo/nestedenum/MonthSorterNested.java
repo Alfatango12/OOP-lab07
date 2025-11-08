@@ -40,11 +40,27 @@ public final class MonthSorterNested implements MonthSorter {
 
     @Override
     public Comparator<String> sortByDays() {
-        return null;
+        return new Comparator<String>() {
+            @Override
+            public int compare(final String s1, final String s2) {
+                checkMonthName(s1);
+                checkMonthName(s2);
+
+                return 0;
+            }
+        };
     }
 
     @Override
     public Comparator<String> sortByOrder() {
-        return null;
+        return new Comparator<String>() {
+            @Override
+            public int compare(final String s1, final String s2) {
+                checkMonthName(s1);
+                checkMonthName(s2);
+
+                return 0;
+            }
+        };
     }
 }
