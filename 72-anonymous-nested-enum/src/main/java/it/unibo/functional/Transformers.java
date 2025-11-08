@@ -4,6 +4,7 @@ import it.unibo.functional.api.Function;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,7 +55,13 @@ public final class Transformers {
      * @return A transformed list where each input element is replaced with the produced elements
      */
     public static <I, O> List<O> transform(final Iterable<I> base, final Function<I, O> transformer) {
-        return null;
+        Iterator<I> it = base.iterator();
+        List<O> result = new ArrayList<O>();
+        while (it.hasNext()) {
+            result.add(transformer.call(it.next()));
+        } 
+
+        return result;
     }
 
     /**
