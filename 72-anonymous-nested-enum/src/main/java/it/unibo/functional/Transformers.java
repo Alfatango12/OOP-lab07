@@ -100,7 +100,15 @@ public final class Transformers {
      * @return A list containing only the elements that passed the test
      */
     public static <I> List<I> select(final Iterable<I> base, final Function<I, Boolean> test) {
-        return null;        
+        List<I> result = new ArrayList<>();
+        Iterator<I> it = base.iterator();  
+        while (it.hasNext()) {
+            var elem = it.next();
+            if (test.call(elem)) {
+                result.add(elem);
+            }
+        }
+        return result;        
     }
 
     /**
@@ -116,6 +124,14 @@ public final class Transformers {
      * @return A list containing only the elements that passed the test
      */
     public static <I> List<I> reject(final Iterable<I> base, final Function<I, Boolean> test) {
-        return null;
+        List<I> result = new ArrayList<>();
+        Iterator<I> it = base.iterator();  
+        while (it.hasNext()) {
+            var elem = it.next();
+            if (!(test.call(elem))) {
+                result.add(elem);
+            }
+        }
+        return result; 
     }
 }
