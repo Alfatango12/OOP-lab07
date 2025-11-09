@@ -25,8 +25,16 @@ public final class MonthSorterNested implements MonthSorter {
     }
 
     private String getMonthFromAbbreviation(final String name) {
-        // To Implement
-        return "";
+        String foundName = "";
+        for (final Month m : Month.values()) {
+            
+            if (m.toString().toLowerCase().startsWith(name.toLowerCase())) {
+                foundName = m.toString();
+                break;
+            }   
+        }
+
+        return foundName;
     }
 
     @Override
