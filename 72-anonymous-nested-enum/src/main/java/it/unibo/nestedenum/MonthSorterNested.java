@@ -9,19 +9,24 @@ import java.util.Objects;
  * Implementation of {@link MonthSorter}.
  */
 public final class MonthSorterNested implements MonthSorter {
+    private final static int monthNotAmbiguousOccurrences = 1;
 
     private void checkMonthName(final String name) {
-        boolean isEqual = false;
+        int counter = 0;
         for (final Month m : Month.values()) {
-            if (name.toLowerCase().equals(m.toString().toLowerCase())) {
-                isEqual = true;
-                break;
-            }
+            
+            if (m.toString().toLowerCase().startsWith(name.toLowerCase())) {
+                counter++;
+            }   
         }
+        if (counter != monthNotAmbiguousOccurrences) {
+            throw new IllegalArgumentException("This name is not a valid month");
+        }
+    }
 
-        if (!isEqual) {
-            throw new IllegalArgumentException("The month " + name + " does not exists");
-        }
+    private String getMonthFromAbbreviation(final String name) {
+        // To Implement
+        return "";
     }
 
     @Override
