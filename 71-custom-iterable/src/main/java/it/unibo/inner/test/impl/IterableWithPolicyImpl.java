@@ -41,11 +41,11 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         
         @Override
         public boolean hasNext() {
-            while (this.currentIndex >= 0 && this.currentIndex < IterableWithPolicyImpl.this.elements.length && !policy.test(IterableWithPolicyImpl.this.elements[this.currentIndex]) ) { //out of bounds
+            while (this.currentIndex >= 0 && this.currentIndex < elements.length && !policy.test(elements[this.currentIndex]) ) { //out of bounds
                 this.currentIndex++;
             }
             
-            if (this.currentIndex >= 0 && this.currentIndex < IterableWithPolicyImpl.this.elements.length) {
+            if (this.currentIndex >= 0 && this.currentIndex < elements.length) {
                 return true;
             }
 
@@ -57,7 +57,7 @@ public class IterableWithPolicyImpl<T> implements IterableWithPolicy<T> {
         }
 
         public T next() {
-            return IterableWithPolicyImpl.this.elements[this.currentIndex++];
+            return elements[this.currentIndex++];
         }
     }
 }
