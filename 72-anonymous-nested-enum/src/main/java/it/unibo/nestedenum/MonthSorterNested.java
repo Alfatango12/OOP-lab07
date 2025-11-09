@@ -29,10 +29,11 @@ public final class MonthSorterNested implements MonthSorter {
         return new Comparator<String>() {
             @Override
             public int compare(final String s1, final String s2) {
+                final boolean leapYear = false; // For this implementation, the leapYear does not modify the days-order of the months
                 checkMonthName(s1);
                 checkMonthName(s2);
 
-                return 0; // To Re-implement
+                return Integer.compare(Month.valueOf(s1.toUpperCase()).length(leapYear), Month.valueOf(s2.toUpperCase()).length(leapYear));
             }
         };
     }
