@@ -2,7 +2,6 @@ package it.unibo.nestedenum;
 
 import java.time.Month;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -36,7 +35,7 @@ public final class MonthSorterNested implements MonthSorter {
                 checkMonthName(s1);
                 checkMonthName(s2);
 
-                return 0;
+                return Integer.compare(Months.valueOf(s1.toUpperCase()).getDays(), Months.valueOf(s2.toUpperCase()).getDays());
             }
         };
     }
@@ -49,7 +48,7 @@ public final class MonthSorterNested implements MonthSorter {
                 checkMonthName(s1);
                 checkMonthName(s2);
 
-                return 0;
+                return s1.compareTo(s2);
             }
         };
     }
