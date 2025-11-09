@@ -32,7 +32,7 @@ public final class MonthSorterNested implements MonthSorter {
                 checkMonthName(s1);
                 checkMonthName(s2);
 
-                return Integer.compare(Months.valueOf(s1.toUpperCase()).getDays(), Months.valueOf(s2.toUpperCase()).getDays());
+                return Integer.compare(Month.valueOf(s1.toUpperCase()).getValue(), Month.valueOf(s2.toUpperCase()).getValue());
             }
         };
     }
