@@ -1,6 +1,8 @@
 package it.unibo.nestedenum;
 
+import java.time.Month;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -11,38 +13,18 @@ public final class MonthSorterNested implements MonthSorter {
     private static final int SHORT_MONTH = 28;
     private static final int USUAL_MONTH = 30;
     private static final int LONG_MONTH = 31;
-   
-    public enum Months {
-        january(),
-        february,
-        march,
-        april,
-        may,
-        june,
-        july,
-        august,
-        september,
-        october,
-        november(USUAL_MONTH),
-        december
-
-        public Months() {
-            
-        }
-    }
 
     private void checkMonthName(final String name) {
-        final String normalizedName = name.toLowerCase();
         boolean isEqual = false;
-        for (final Months month : MonthSorterNested.Months.values()) {
-            if (normalizedName.equals(month.toString())) {
+        for (final Months m : Months.values()) {
+            if (name.toLowerCase().equals(m.toString().toLowerCase())) {
                 isEqual = true;
                 break;
             }
         }
 
         if (!isEqual) {
-            throw new IllegalArgumentException("The months " + name + " does not exists");
+            throw new IllegalArgumentException("The month " + name + " does not exists");
         }
     }
 
@@ -70,5 +52,29 @@ public final class MonthSorterNested implements MonthSorter {
                 return 0;
             }
         };
+    }
+
+    public enum Months {
+        JANUARY(LONG_MONTH), 
+        FEBRUARY(SHORT_MONTH), 
+        MARCH(LONG_MONTH), 
+        APRIL(USUAL_MONTH), 
+        MAY(LONG_MONTH),
+        JUNE(USUAL_MONTH),
+        JULY(LONG_MONTH),
+        AUGUST(LONG_MONTH),
+        SEPTEMBER(USUAL_MONTH),
+        OCTOBER(LONG_MONTH),
+        NOVEMBER(USUAL_MONTH),
+        DECEMBER(LONG_MONTH);
+
+        private final int days;
+        Months (int days) {
+            this.days = days;
+        }
+
+        public int getDays() {
+            return days;
+        }
     }
 }
